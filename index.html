@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki des Adobe tools</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4 mb-4">Wiki des Adobe tools</h1>
+        <div class="row">
+            <!-- Boucle pour afficher les outils depuis le JSON -->
+            <script>
+                // Charger le fichier JSON
+                fetch('tools.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Boucle à travers les outils
+                        data.forEach(tool => {
+                            // Créer une colonne Bootstrap
+                            const toolCol = document.createElement('div');
+                            toolCol.classList.add('col-md-3', 'mb-4');
+
+                            // Créer une carte Bootstrap pour chaque outil
+                            const toolCard = document.createElement('div');
+                            toolCard.classList.add('card');
+
+                            // Créer l'image de l'outil
+                            const toolImage = document.createElement('img');
+                            toolImage.classList.add('card-img-top');
+                            toolImage.src = tool.image;
+                            toolImage.alt = tool.nom;
+
+                            // Créer le nom de l'outil
+                            const toolName = document.createElement('div');
+                            toolName.classList.add('card-body');
+                            toolName.innerHTML = `<h5 class="card-title">${tool.nom}</h5>`;
+
+                            // Ajouter l'image et le nom à la carte
+                            toolCard.appendChild(toolImage);
+                            toolCard.appendChild(toolName);
+
+                            // Ajouter la carte à la colonne
+                            toolCol.appendChild(toolCard);
+
+                            // Ajouter la colonne à la rangée
+                            document.querySelector('.row').appendChild(toolCol);
+                        });
+                    });
+            </script>
+        </div>
+    </div>
+
+    <!-- Inclure Bootstrap JavaScript (facultatif) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
